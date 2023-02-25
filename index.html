@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebView SPA Template - Karrot</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <script>
+      function isIOS() {
+        return /iphone|ipad|ipod/i.test(
+          window.navigator.userAgent.toLowerCase(),
+        );
+      }
+    </script>
+    <script>
+      (() => {
+        var c = isIOS();
+        var e = document.documentElement;
+
+        e.dataset.seedScaleLetterSpacing = c ? "ios" : "android";
+        e.dataset.seed = "";
+        var pd = window.matchMedia("(prefers-color-scheme: dark)"),
+          a = () => {
+            e.dataset.seedScaleColor = pd.matches ? "dark" : "light";
+          };
+        "addEventListener" in pd
+          ? pd.addEventListener("change", a)
+          : "addListener" in pd && pd.addListener(a),
+          a();
+      })();
+    </script>
+    <script>
+      (() => {
+        var c = isIOS();
+        var e = document.documentElement;
+        e.dataset.stackflowBasicUiTheme = c ? "cupertino" : "android";
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/index.tsx"></script>
+  </body>
+</html>
